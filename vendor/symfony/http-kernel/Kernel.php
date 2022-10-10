@@ -78,15 +78,15 @@ abstract class Kernel implements KernelInterface, RebootableInterface, Terminabl
      */
     private static array $freshCache = [];
 
-    public const VERSION = '6.0.4';
-    public const VERSION_ID = 60004;
+    public const VERSION = '6.1.3';
+    public const VERSION_ID = 60103;
     public const MAJOR_VERSION = 6;
-    public const MINOR_VERSION = 0;
-    public const RELEASE_VERSION = 4;
+    public const MINOR_VERSION = 1;
+    public const RELEASE_VERSION = 3;
     public const EXTRA_VERSION = '';
 
-    public const END_OF_MAINTENANCE = '07/2022';
-    public const END_OF_LIFE = '07/2022';
+    public const END_OF_MAINTENANCE = '01/2023';
+    public const END_OF_LIFE = '01/2023';
 
     public function __construct(string $environment, bool $debug)
     {
@@ -460,9 +460,7 @@ abstract class Kernel implements KernelInterface, RebootableInterface, Terminabl
             is_dir($buildDir) ?: mkdir($buildDir, 0777, true);
 
             if ($lock = fopen($cachePath.'.lock', 'w')) {
-                flock($lock, \LOCK_EX | \LOCK_NB, $wouldBlock);
-
-                if (!flock($lock, $wouldBlock ? \LOCK_SH : \LOCK_EX)) {
+                if (!flock($lock, \LOCK_EX | \LOCK_NB, $wouldBlock) && !flock($lock, $wouldBlock ? \LOCK_SH : \LOCK_EX)) {
                     fclose($lock);
                     $lock = null;
                 } elseif (!is_file($cachePath) || !\is_object($this->container = include $cachePath)) {

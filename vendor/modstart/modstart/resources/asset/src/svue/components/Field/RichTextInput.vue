@@ -1,23 +1,43 @@
 <template>
     <div>
-        <RichEditor :data="data" @input="onDataChange" :server="server" />
+        <TinyMCEEditor v-model="datav"/>
     </div>
 </template>
 
 <script>
 
     import {FieldInputMixin} from "../../lib/fields-config";
-    import RichEditor from "../RichEditor";
+    import TinyMCEEditor from "../TinyMCEEditor";
+
 
     export default {
         name: "RichTextInput",
-        components: {RichEditor},
+        components: {TinyMCEEditor},
         mixins: [FieldInputMixin],
-        props: {
-            server: {
-                type: String,
-                default: '/member_data/ueditor'
-            },
+        data() {
+            return {
+                datav: '',
+            }
         },
+        mounted() {
+            if (!this.data) {
+                this.datav = this.defaultValue
+            } else {
+                this.datav = this.data
+            }
+        },
+        methods: {},
+        watch: {
+            datav(newValue, oldValue) {
+                if (newValue !== this.data) {
+                    this.$emit('update', newValue)
+                }
+            },
+            data(newValue, oldValue) {
+                if (newValue !== this.datav) {
+                    this.datav = newValue
+                }
+            },
+        }
     }
 </script>

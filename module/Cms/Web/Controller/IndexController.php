@@ -9,6 +9,6 @@ class IndexController extends ModuleBaseController
 {
     public function index()
     {
-        return $this->view('cms.index');
+        return $this->view('skcms.index');
     }
 }

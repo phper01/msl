@@ -10,7 +10,7 @@
                 <el-form-item label="ID">
                     {{$store.state.user.id}}
                 </el-form-item>
-                <el-form-item label="昵称">
+                <el-form-item label="姓名">
                     {{$store.state.user.nickname}}
                 </el-form-item>
                 <el-form-item label="手机">

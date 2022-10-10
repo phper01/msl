@@ -5,8 +5,10 @@ namespace Illuminate\Foundation\Console;
 use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputOption;
 
+#[AsCommand(name: 'make:listener')]
 class ListenerMakeCommand extends GeneratorCommand
 {
     use CreatesMatchingTest;
@@ -24,6 +26,8 @@ class ListenerMakeCommand extends GeneratorCommand
      * This name is used to identify the command during lazy loading.
      *
      * @var string|null
+     *
+     * @deprecated
      */
     protected static $defaultName = 'make:listener';
 
@@ -117,7 +121,7 @@ class ListenerMakeCommand extends GeneratorCommand
     {
         return [
             ['event', 'e', InputOption::VALUE_OPTIONAL, 'The event class being listened for'],
-
+            ['force', 'f', InputOption::VALUE_NONE, 'Create the class even if the listener already exists'],
             ['queued', null, InputOption::VALUE_NONE, 'Indicates the event listener should be queued'],
         ];
     }

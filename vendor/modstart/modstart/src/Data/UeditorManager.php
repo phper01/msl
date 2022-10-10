@@ -104,12 +104,7 @@ class UeditorManager
             "fileManagerListSize" => 20,
             "fileManagerAllowFiles" => array_map(function ($v) {
                 return '.' . $v;
-            }, $dataUploadConfig['file']['extensions']),
-
-            // 公式渲染
-            "formulaConfig" => [
-                "imageUrlTemplate" => modstart_config('UEditor_FormulaImageUrlTemplate', 'https://latex.codecogs.com/svg.image?{}'),
-            ]
+            }, $dataUploadConfig['file']['extensions'])
         ];
         return $config;
     }

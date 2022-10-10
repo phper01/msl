@@ -233,14 +233,7 @@ function modstart_config($key = null, $default = '', $useCache = true)
         if (is_null($key)) {
             return app('modstartConfig');
         }
-        $v = app('modstartConfig')->get($key, $default, $useCache);
-        if (true === $default || false === $default) {
-            return boolval($v);
-        }
-        if (0 === $default) {
-            return intval($v);
-        }
-        return $v;
+        return app('modstartConfig')->get($key, $default, $useCache);
     } catch (Exception $e) {
         return $default;
     }

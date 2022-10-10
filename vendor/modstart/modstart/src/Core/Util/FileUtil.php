@@ -262,17 +262,7 @@ class FileUtil
         if ($size == 0) {
             return ("0 Bytes");
         }
-        $units = [" Bytes", " KB", " MB", " GB", " TB", " PB", " EB", " ZB", " YB"];
-        return round($size / pow(1024, ($i = floor(log($size, 1024)))), $decimals) . $units[$i];
-    }
-
-    public static function formatByteSimple($bytes, $decimals = 2)
-    {
-        $size = sprintf("%u", $bytes);
-        if ($size == 0) {
-            return ("0 Bytes");
-        }
-        $units = ["B", "K", "M", "G", "T", "P", "E", "Z", "Y"];
+        $units = array(" Bytes", " KB", " MB", " GB", " TB", " PB", " EB", " ZB", " YB");
         return round($size / pow(1024, ($i = floor(log($size, 1024)))), $decimals) . $units[$i];
     }
 

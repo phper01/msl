@@ -51,7 +51,7 @@ class FileAttributes implements StorageAttributes
         ?string $mimeType = null,
         array $extraMetadata = []
     ) {
-        $this->path = $path;
+        $this->path = ltrim($path, '/');
         $this->fileSize = $fileSize;
         $this->visibility = $visibility;
         $this->lastModified = $lastModified;
@@ -104,7 +104,7 @@ class FileAttributes implements StorageAttributes
         return false;
     }
 
-    public function withPath(string $path): StorageAttributes
+    public function withPath(string $path): self
     {
         $clone = clone $this;
         $clone->path = $path;
@@ -112,7 +112,7 @@ class FileAttributes implements StorageAttributes
         return $clone;
     }
 
-    public static function fromArray(array $attributes): StorageAttributes
+    public static function fromArray(array $attributes): self
     {
         return new FileAttributes(
             $attributes[StorageAttributes::ATTRIBUTE_PATH],

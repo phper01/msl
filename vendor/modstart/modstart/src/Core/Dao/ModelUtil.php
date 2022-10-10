@@ -903,10 +903,8 @@ class ModelUtil
             $select = [];
             $select[] = $model . '.*';
             foreach ($option['joins'] as $join) {
-                if (!empty($join['table'])) {
+                if (!empty($join['table']) && !empty($join['fields'])) {
                     $m = $m->leftJoin($join['table'][0], $join['table'][1], $join['table'][2], $join['table'][3]);
-                }
-                if (!empty($join['fields'])) {
                     foreach ($join['fields'] as $fieldAlias => $fieldTable) {
                         array_push($select, "$fieldTable as $fieldAlias");
                     }

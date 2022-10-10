@@ -179,9 +179,11 @@
         }
     }
 
-    .ub-header {
+    body.ub-header-show {
+        overflow: hidden;
 
-        &.show {
+        .ub-header {
+
             .menu-mask {
                 content: '';
                 display: block;
@@ -1285,7 +1287,7 @@
         left: 0;
         right: 0;
         z-index: 10000;
-        background: var(--color-content-bg);
+        background: #FFF;
     }
 
     .header-container {
@@ -1294,8 +1296,8 @@
         right: 0;
         height: 50px;
         z-index: 500;
-        box-shadow: 0 1px 1px var(--color-body-line);
-        background: var(--color-content-bg);
+        box-shadow: 0 1px 1px #EEE;
+        background: #FFF;
 
         .body {
             display: flex;

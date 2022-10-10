@@ -5,11 +5,14 @@ namespace Module\Vendor\Provider\SiteTemplate;
 
 
 
+use App\Web\Controller\SKSiteTemplateProvider;
+
 class SiteTemplateProvider
 {
     
     private static $instances = [
         DefaultSiteTemplateProvider::class,
+        SKSiteTemplateProvider::class,
     ];
 
     public static function register($provider)

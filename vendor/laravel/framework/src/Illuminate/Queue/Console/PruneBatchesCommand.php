@@ -7,7 +7,9 @@ use Illuminate\Bus\DatabaseBatchRepository;
 use Illuminate\Bus\PrunableBatchRepository;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'queue:prune-batches')]
 class PruneBatchesCommand extends Command
 {
     /**
@@ -25,6 +27,8 @@ class PruneBatchesCommand extends Command
      * This name is used to identify the command during lazy loading.
      *
      * @var string|null
+     *
+     * @deprecated
      */
     protected static $defaultName = 'queue:prune-batches';
 
@@ -50,16 +54,16 @@ class PruneBatchesCommand extends Command
             $count = $repository->prune(Carbon::now()->subHours($this->option('hours')));
         }
 
-        $this->info("{$count} entries deleted!");
+        $this->components->info("{$count} entries deleted.");
 
-        if ($unfinished = $this->option('unfinished')) {
+        if ($this->option('unfinished')) {
             $count = 0;
 
             if ($repository instanceof DatabaseBatchRepository) {
                 $count = $repository->pruneUnfinished(Carbon::now()->subHours($this->option('unfinished')));
             }
 
-            $this->info("{$count} unfinished entries deleted!");
+            $this->components->info("{$count} unfinished entries deleted.");
         }
     }
 }
